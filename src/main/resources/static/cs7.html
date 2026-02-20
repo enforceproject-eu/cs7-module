@@ -32,7 +32,7 @@ html, body {
 
 .leaflet-popup-content {
 	height: 100%;
-	width: 300px !important;
+	width: 350px !important;
 }
 
 img.half {
@@ -117,21 +117,32 @@ img.half {
                     onEachFeature: (feature, layer) => {
                         var title= "feature"
                 		var marker = L.marker(new L.LatLng(feature.geometry.coordinates[1], feature.geometry.coordinates[0]), { title: title });
-                        var content = "<h1>Compartment: " + feature.id + "</h1>";
+                        var content = "<h1>" + feature.properties.compartment_description + " sample </h1>";
+                        content = content + "<h2>Date: " + feature.properties.date + "</h2>";
                         var tableInner = "";
                         tableInner = tableInner + "<tr>";
-                        tableInner = tableInner + "<td>pfba</td>";
-                        tableInner = tableInner + "<td>" + feature.id + "</td>";
+                        tableInner = tableInner + "<td>Parameter</td>";
+                        tableInner = tableInner + "<td>" + feature.properties.parameter_description + "</td>";
                         tableInner = tableInner + "</tr>";
                         
                         tableInner = tableInner + "<tr>";
-                        tableInner = tableInner + "<td>biomass</td>";
-                        tableInner = tableInner + "<td>" + feature.id + "</td>";
+                        tableInner = tableInner + "<td>Value</td>";
+                        tableInner = tableInner + "<td>" + feature.properties.value + "</td>";
                         tableInner = tableInner + "</tr>";
                         
                         tableInner = tableInner + "<tr>";
-                        tableInner = tableInner + "<td>total above</td>";
-                        tableInner = tableInner + "<td>" + feature.id + "</td>";
+                        tableInner = tableInner + "<td>Unit</td>";
+                        tableInner = tableInner + "<td>" + feature.properties.unit_code + "</td>";
+                        tableInner = tableInner + "</tr>";
+                        
+                        tableInner = tableInner + "<tr>";
+                        tableInner = tableInner + "<td>Sampling device</td>";
+                        tableInner = tableInner + "<td>" + feature.properties.sampling_device_description + "</td>";
+                        tableInner = tableInner + "</tr>";
+                        
+                        tableInner = tableInner + "<tr>";
+                        tableInner = tableInner + "<td>Sampling type</td>";
+                        tableInner = tableInner + "<td>" + feature.properties.sampling_type_description + "</td>";
                         tableInner = tableInner + "</tr>";
                         var customPopup = content
                         +  "<h2>Properties</h2>"
