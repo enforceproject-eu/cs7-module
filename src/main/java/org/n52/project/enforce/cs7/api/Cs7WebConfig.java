@@ -2,6 +2,8 @@ package org.n52.project.enforce.cs7.api;
 
 import java.util.List;
 
+import org.springdoc.core.models.GroupedOpenApi;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -21,6 +23,11 @@ public class Cs7WebConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
         messageConverters.add(new Cs7MessageConverter());
+    }
+    
+    @Bean
+    GroupedOpenApi cs7Apis() {
+      return GroupedOpenApi.builder().group("cs7").pathsToMatch("/cs7_measurement_data/**").build();
     }
     
 }
