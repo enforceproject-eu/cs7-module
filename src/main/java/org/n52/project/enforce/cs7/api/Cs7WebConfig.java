@@ -18,16 +18,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class Cs7WebConfig implements WebMvcConfigurer {
-    
-    /** {@inheritDoc} */
+
     @Override
-    public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {
-        messageConverters.add(new Cs7MessageConverter());
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        converters.add(new Cs7MessageConverter());
     }
-    
+
     @Bean
     GroupedOpenApi cs7Apis() {
-      return GroupedOpenApi.builder().group("cs7").pathsToMatch("/cs7_measurement_data/**").build();
+        return GroupedOpenApi.builder().group("cs7").pathsToMatch("/cs7_measurement_data/**").build();
     }
-    
+
 }
